@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DemoBlog</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<section class="hero is-primary is-medium">
+	  <!-- Hero head: will stick at the top -->
+	  <div class="hero-head">
+	    <nav class="navbar">
+	      <div class="container">
+	        <div class="navbar-brand">
+                  <%= link_to 'Demo Blog', root_path, class: "navbar-item" %>
+	          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+	            <span></span>
+	            <span></span>
+	            <span></span>
+	          </span>
+	        </div>
+	        <div id="navbarMenuHeroA" class="navbar-menu">
+                  <div class="navbar-end">
+                    <% if current_user%>
+                    <%= link_to "Create New Post", new_post_path, class:"navbar-item" %>
+                    <%= link_to "Logout", "/users/sign_out", method: "delete", class: "navbar-item"%>
+                    <%= link_to "Edit Profile", "/users/edit", method: "get", class: "navbar-item"%>
+                    <% if current_user.avatar.attached? %>
+                      <img  src = "<%= (url_for(current_user.avatar))%>" height= "40" width= "45" style = "margin:0 auto; border-radius:50%;"  >
+                    <% end %>
+                    <% else %>
+                      <%= link_to "Sign In", "/users/sign_in",class: "navbar-item"%>
+                    <%end%>
+	          </div>
+	        </div>
+	      </div>
+	    </nav>
+	  </div>
+
+	  <!-- Hero content: will be in the middle -->
+	    <div class="container has-text-centered">
+	      <h1 class="title">
+                <%= yield :page_title %>
+              </h1>
+              <p class="body">
+              <%= yield :page_content%>
+              </p>
+            </div>
+	</section>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+    <%= yield %>
+  </body>
+</html>

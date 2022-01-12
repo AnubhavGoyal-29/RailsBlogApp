@@ -1,0 +1,32 @@
+<% content_for :page_title,  "All Blogs" %>
+<% if current_user %>
+<% content_for :page_content, "Currently Logged In :"+current_user.name%>
+<% end %>
+<div class="section">
+  <div class="container">
+    <% @posts.each do |post| %>
+      <%= link_to post do%>
+        <div class="card mb-2">
+          <div class="card-content mt-2 ">
+            <div class="media">
+              <div class="media-content">
+                <h3 class="title is-4 bold"><%= post.title %></h3>
+              </div>
+            </div>
+            <% if post.image.attached?%>
+              <div class="text-center">
+                <img src="<%= url_for(post.image)%>" height="200" width="200" class="img-responsive" style=" margin:0 auto;"/>
+              </div>
+            <%end%>
+            <div class="content">
+              <%= post.content %>
+            </div>
+            <div class="comment-count">
+              <span class="tag is-rounded"><%= post.comments.count %> comments</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
