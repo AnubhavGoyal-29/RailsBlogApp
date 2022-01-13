@@ -1,12 +1,12 @@
 <% content_for :page_title,  "All Blogs" %>
-<% if current_user %>
+<% if current_user && current_user.name %>
 <% content_for :page_content, "Currently Logged In :"+current_user.name%>
 <% end %>
-<div class="section">
-  <div class="container">
-    <% @posts.each do |post| %>
+<div class="section" style="margin auto;">
+  <div class="container" style="margin:0 auto;">
+   <% @posts.each do |post| %>
       <%= link_to post do%>
-        <div class="card mb-2">
+        <div class="card mb-2" style= "margin auto; padding 1rem">
           <div class="card-content mt-2 ">
             <div class="media">
               <div class="media-content">
