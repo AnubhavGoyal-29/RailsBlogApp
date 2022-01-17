@@ -12,6 +12,5 @@ ActiveAdmin.register Post do
    permit_params do
      permitted = [:title, :content, :user_id]
    end
-
- 
+  
 end
