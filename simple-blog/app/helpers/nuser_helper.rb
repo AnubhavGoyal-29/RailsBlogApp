@@ -1,0 +1,2 @@
+module NuserHelper
+end
