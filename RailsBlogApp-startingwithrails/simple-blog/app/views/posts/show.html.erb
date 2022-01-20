@@ -1,0 +1,39 @@
+<% content_for :page_title, @post.title %>
+<% content_for :page_content, @post.content%>
+<% if @post.user == current_user %>
+<section class="section">
+	<div class="container">
+		<nav class="level">
+		  <!-- Left side -->
+		  <div class="level-left">
+		    <p class="level-item">
+		        <strong>Actions</strong>
+		    </p>
+		  </div>
+		  <!-- Right side -->
+		  <div class="level-right">
+		  	<p class="level-item">
+		    	<%= link_to "Edit", edit_post_path(@post), class:"button" %>
+		  	</p>
+		  	<p class="level-item">
+				<%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class:"button is-danger" %>
+				</p>
+		  </div>
+		</nav>
+	</div>
+</section>
+<%end%>
+<section class="section">
+	<div class="container">
+		<h2 class="subtitle is-5"><strong><%= @post.comments.count %></strong> Comments</h2>
+                <% @post.comments.each do |comment| %>
+                   <%= render comment%>
+                <%end%>
+                <% if current_user %>
+		<div class="comment-form">
+		  <h3 class="subtitle is-3">Leave a reply</h3>
+	 	  <%= render 'comments/form' %>
+                </div>
+              <%end%>
+	</div>
+</section>
